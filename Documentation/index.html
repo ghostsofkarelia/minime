@@ -1,0 +1,361 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>miniMe</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<!--<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,800,700,900' rel='stylesheet' type='text/css'/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+	<div class="container">
+	   <div class="col-md-12 documentation">
+       <div class="content-logo"><img src="assets/images/logo_mini.jpg" alt="" /><h3>Documentation</h3></div>
+
+		<hr>
+		
+		<div class="borderTop">
+			
+				<p class="prepend-top">
+					<strong>
+					Created: 01/02/2015<br>
+					By: Corsaro<br>
+					</strong>
+				</p>
+			<div class="last">
+				<p class="prepend-top append-0">
+                Thank you for purchasing my theme. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://themeforest.net/user/corsaro">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+	    
+		
+		<h3>1. Preview </h3>
+		<p>Preview: for setting the time go inside the file main.js where you find this code</p>
+        <p>setting timeout so the time how much long need to stay the preview</p>
+        <pre>
+            try {
+
+                setTimeout(function () { $("#loader-wrapper").slideUp() }, 2000);
+            } catch (err) {
+            }
+        </pre>
+       <h3>2. Work </h3>
+		<p>Work it s part for pewsent your project this use the isotope library "js/gallery/isotope.js"</p>
+        <p>The first part with class .albumcontainer this use for the image where you can setting the duration time to move the image</p>
+        <p>The second it s for setting the filter who is checked</p>
+        <p>if you whant know more go in </p><a href="http://isotope.metafizzy.co/filtering.html">Isotope</a><br /><br />
+        <pre>
+             $(window).load(function () {
+                var $container = $('.albumContainer');
+                $container.isotope({
+                    filter: '*',
+                    animationOptions: {
+                        duration: 750,
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
+
+                $('.albumFilter li').click(function () {
+                    $('.albumFilter .current').removeClass('current');
+                    $(this).addClass('current');
+
+                    var selector = $(this).attr('data-filter');
+                    $container.isotope({
+                        filter: selector,
+                        animationOptions: {
+                            duration: 750,
+                            easing: 'linear',
+                            queue: false
+                        }
+                    });
+                    return false;
+                });
+            });
+        </pre>
+
+        <h3>3. Carousel </h3>
+		<p>The carousel you find in the part "WHAT PEOPLE SAY" before the experiences, this use this js file "js/owl_carousel/owl.carousel.js"</p>
+        <p>and this css file 1. "css/owl_carousel/owl.carousel.css" 2. "css/owl_carousel/owl.theme.css"</p>
+        <p>This part the code js need for call the method js and you find inside the file main.js</p>
+        <p>All proprety you whant add or change you find in this page: </p> <a href="http://owlgraphic.com/owlcarousel/">OWLCAROUSEL</a><br /><br />
+        <pre>
+        
+          $("#owl-demo").owlCarousel({
+
+                navigation: true, // Show next and prev buttons
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+
+                // "singleItem:true" is a shortcut for:
+                // items : 1, 
+                // itemsDesktop : false,
+                // itemsDesktopSmall : false,
+                // itemsTablet: false,
+                // itemsMobile : false
+
+            });
+        </pre>
+
+        <h3>4. Experiences </h3>
+        <p>Experiences content the skills percentage, this work with this library "js/jquery.appear.js" we call this inside the main.js with this part the code:</p>
+        <pre>
+           try {
+
+                var skillBar = $('.skills-progress');
+                skillBar.appear(function () {
+
+                    var animateElement = $(".meter > p");
+                    animateElement.each(function () {
+                        $(this)
+					        .data("origWidth", $(this).width())
+					        .width(0)
+					        .animate({
+					            width: $(this).data("origWidth")
+					        }, 1200);
+                    });
+
+                });
+            } catch (err) {
+        }
+        
+        </pre>
+
+
+        <p>where 1200 it s the velocity you give at the line for charge.</p>
+        <p>the code setting style you finde inside the style.css serch class ".skills-box"</p>
+
+        <h3>5. Contact </h3>
+
+        <p>contact use ajax control before sending the email with this code:</p>
+
+        <pre>
+        $(function () {
+            "use strict";
+            $('#contact_form').submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var text = $("#message").val();
+                var dataString = 'name=' + name + '&email=' + email + '&message=' + text;
+                var proceed = true;
+                if (name == "") {
+                    $('input[name=name]').css('border-color', '#e41919');
+                    proceed = false;
+                }
+                if (email == "") {
+                    $('input[name=email]').css('border-color', '#e41919');
+                    proceed = false;
+                }
+
+                if (text == "") {
+                    $('textarea[name=message]').css('border-color', '#e41919');
+                    proceed = false;
+                }
+        
+                    function isValidEmail(emailAddress) {
+                        var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+                        return pattern.test(emailAddress);
+                    };
+                    if (isValidEmail(email) && proceed) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "contact_form/contact_process.php",
+                            data: dataString,
+                            success: function () {
+                                $('.success').fadeIn(1000);
+                                $("#name").val("");
+                                $("#email").val("");
+                                $("#message").val("");
+                            }
+                        });
+                    } else {
+                        $('.error').fadeIn(1000);
+                    }
+        
+            });
+            });
+        </pre>
+
+        <p>The first part take the info from the form after control if the info its empty if yes color the red the box after this control validation email if all it s ok send the email
+        with the file php contact_process.php the structure down:</p>
+        <pre>
+            
+                $to = "alessio.corsini@gmail.com";
+                $name = $_POST['name'];
+                $message = $_POST['message'];
+                $from = $_POST['email'];
+                $headers = "From:" . $from;
+                mail($to,$name,$message,$headers);
+                echo "Mail Sent.";
+               
+        </pre>
+
+        <p>After this write the message succesfull and cancel the content inside the box.</p>
+
+        <hr>
+		<h3>6. Structure file css</h3>
+        <p>Css in file style.css you find all comment for website structure</p>
+        <pre>
+        
+        /*** LOGO ***/
+
+        /*** MENU ***/
+           /* + Mini Menu*/
+
+        /**** STRUCTURE ***/
+
+        /****** SKILLS ******/
+
+        /***************PAGE PORTFOLIO/GALLERY*********************/
+            /* + Effect hover gallery */
+
+
+        /*** EXPERIENCES *****/
+
+        /*** CONTACT *****/
+
+        /*** GOOGLE MAPS ****/
+
+        /*** FOOTER ****/
+
+        /*** BUTTON TOTOP *****/
+
+        /***** PAGE DETAILS ******/
+        </pre>
+
+		<hr>
+		
+        <h3>AngularJs Documentation</h3>
+        <p>All role i write before it s valid in template angular except what i write down....</p>
+
+        <h3>1. Index routeProvider</h3>
+        <p>In Angular you have different mode for call the page, no refresh</p>
+        <p>The index structure content only the library file js and css, and the header footer separate to the body ng-view</p>
+        <pre>
+            &lt;div ng-include='"templates/header.html"'&gt;&lt;/div&gt;
+            &lt;div class="page {{ pageClass }}" ng-view&gt;&lt;/div&gt;
+            &lt;div ng-include='"templates/footer.html"'&gt;&lt;/div&gt;
+        </pre>
+        <p>this part work with this code down for management all page need to call</p>
+
+        <pre>
+        var app = angular.module('miniMe', [
+              'ngRoute', 'ngMap', 'ngAnimate'
+            ]);
+
+            /**
+            * Configure the Routes
+            */
+            app.config(['$routeProvider', function ($routeProvider) {
+                $routeProvider
+                // Home
+                .when("/", { templateUrl: "partials/home.html", controller: "PageCtrl" })
+
+                // Pages
+                .when("/work", { templateUrl: "partials/work.html", controller: "PageCtrl" })
+
+                .when("/experiences", { templateUrl: "partials/experiences.html", controller: "PageCtrl" })
+                .when("/contact", { templateUrl: "partials/contact.html", controller: "PageCtrl" })
+
+                // else 404
+                .otherwise("/404", { templateUrl: "partials/404.html", controller: "PageCtrl" });
+            } ]);
+        </pre>
+
+        <h3>2. Porfolio</h3>
+
+        <p>The porfolio with wrok project the data base with image src url description etc... it s inside the main.js</p>
+
+        <pre>     
+            app.controller("dataImagesWork", function ($scope) {
+                $scope.images_work = [
+                      { num: 1, category: 'marketing', src: "1.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 2, category: 'branding', src: "2.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 3, category: 'design', src: "3.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 4, category: 'photo', src: "4.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 5, category: 'marketing', src: "5.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 6, category: 'design', src: "6.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 7, category: 'photo', src: "7.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 8, category: 'marketing', src: "8.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html" },
+                      { num: 9, category: 'design', src: "9.jpg", description: 'Oscar is a decent man. He used to clean porches with pleasure. ', url_details: "details.html"}];
+
+            });
+        </pre>
+        <p>For create the portfolio need only to call and repeat what you have inside the images_work in this mode ng-repeat="product in images_work | filter:myFilter", and dinamicaly crete a portfolio</p>
+        <p>If you need to change the effect for the filter need only to change the css, this part:</p>
+        <pre>
+           .my-gallery-animation.ng-enter, 
+            .my-gallery-animation.ng-leave { 
+                -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+                -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+                -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+                -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+                transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+                position: relative;
+                display: block;
+            } 
+
+            .my-gallery-animation.ng-leave.ng-leave-active,
+            .my-gallery-animation.ng-enter {
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -ms-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+                opacity: 0;
+            }        
+
+            .my-gallery-animation.ng-enter.ng-enter-active,
+            .my-gallery-animation.ng-leave {
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+        
+        </pre>
+
+        <h3>3. Page Effect</h3>
+
+        <p>The page when you chnge and movefrom one page in other page the controller effect it s this:</p>
+        <pre>
+          app.controller('PageCtrl', function ( $scope/*, $location, $http */) {
+                console.log("Page Controller reporting for duty.");
+                $scope.pageClass = 'page-effect';
+            });
+        </pre>
+        <p>This typethe effect you find inside the css, it s this:</p>
+
+        <pre>
+        .page-effect.ng-enter {  
+            -webkit-animation: fadeInDown 2s ease-in;
+            -moz-animation: fadeInDown 2s ease-in;
+            -o-animation: fadeInDown 2s ease-in;
+            animation: fadeInDown 2s ease-in;   
+        }
+        
+        </pre>
+
+		<p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p> 
+		
+		<p class="append-bottom alt large"><strong>Corsaro</strong></p>
+		
+		
+		<hr class="space">
+        </div>
+	</div><!-- end div .container -->
+</body>
+</html>
